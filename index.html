@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hallo Ichaa! | Siti Marisa Saskia</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ungu-tua:#54449a; --ungu:#8272d6; --ungu-muda:#d4c8fa; --lavender:#efeaff;
+  --sky:#bfe3ff; --sky-tua:#3f7fb8; --pink:#f9b5d6; --krem:#f3faff; --teks:#2e2a52; --muted:#625d90;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Quicksand',system-ui,sans-serif;color:var(--teks);line-height:1.65;
+  background:linear-gradient(165deg,#e4d9ff 0%,#d3dcff 40%,#c4e4ff 75%,#e6f5ff 100%) fixed;min-height:100vh}
+h1,h2,h3{font-family:'Fredoka','Quicksand',sans-serif;margin:0;line-height:1.2}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px 60px}
+
+.bunga{position:fixed;top:-40px;font-size:22px;opacity:.5;pointer-events:none;animation:jatuh linear infinite;z-index:0}
+@keyframes jatuh{to{transform:translateY(110vh) rotate(360deg)}}
+
+header{position:relative;z-index:1;text-align:center;padding:36px 0 10px}
+.kucing{width:150px;height:auto;animation:goyang 3s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes goyang{50%{transform:rotate(4deg)}}
+header h1{font-size:clamp(2.2rem,8vw,3.6rem);margin-top:6px;background:linear-gradient(90deg,#7a63d6,#4a9ad8);-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{margin:6px 0 0;color:var(--muted);font-weight:600}
+
+nav{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+  padding:12px 8px;margin:14px -16px 20px;background:rgba(226,236,255,.88);backdrop-filter:blur(6px)}
+nav button{font:600 1rem 'Fredoka',sans-serif;color:var(--ungu-tua);background:#fff;border:2px solid var(--ungu-muda);
+  border-radius:999px;padding:8px 20px;cursor:pointer;transition:.15s}
+nav button:hover{background:var(--ungu-muda)}
+nav button[aria-selected="true"]{background:var(--ungu);border-color:var(--ungu);color:#fff}
+nav button:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+
+section{display:none;position:relative;z-index:1}
+section.aktif{display:block}
+.kartu{background:#fff;border:2px solid var(--ungu-muda);border-radius:26px;padding:24px;
+  box-shadow:0 8px 0 var(--ungu-muda);margin-bottom:26px}
+.kartu h2{color:var(--ungu-tua);font-size:1.7rem;margin-bottom:14px}
+
+.bio{display:grid;grid-template-columns:190px 1fr;gap:22px;align-items:start}
+.profil{aspect-ratio:1;border-radius:50%;border:5px solid #fff;box-shadow:0 0 0 4px var(--ungu-muda);background:var(--lavender);
+  display:grid;place-items:center;font-size:84px;overflow:hidden}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 14px}
+dt{background:var(--lavender);color:var(--ungu-tua);font-weight:700;border-radius:12px;padding:2px 14px;height:fit-content}
+dd{margin:0;align-self:center;overflow-wrap:anywhere}
+
+.galeri{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.foto{margin:0;border:3px solid var(--ungu-muda);border-radius:22px;overflow:hidden;background:var(--lavender);cursor:zoom-in}
+.foto .gbr{aspect-ratio:4/3;display:grid;place-items:center;font-size:56px;color:var(--ungu);overflow:hidden}
+.foto figcaption{padding:8px 12px;font-weight:700;background:#fff;border-top:3px solid var(--ungu-muda);color:var(--ungu-tua)}
+
+.video{aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:3px solid var(--ungu);background:#1b1030}
+.video video,.video iframe{width:100%;height:100%;border:0;display:block}
+.kosong{height:100%;display:grid;place-items:center;text-align:center;color:var(--ungu-muda);padding:20px}
+
+.isi p{margin:0 0 12px}
+.tombol{display:inline-block;font:600 1rem 'Fredoka',sans-serif;color:#fff;background:var(--ungu);
+  border-radius:999px;padding:8px 22px;text-decoration:none;border:0;cursor:pointer}
+.tombol:hover{background:var(--ungu-tua)}
+.tombol.mati{background:var(--ungu-muda);pointer-events:none}
+
+.embed{width:100%;height:760px;border:3px solid var(--ungu-muda);border-radius:18px;background:#fff;margin-top:8px}
+.taman{display:block;width:min(100%,520px);margin:0 auto;position:relative;z-index:1}
+
+/* sajian data */
+.ringkas{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:6px 0 14px}
+.angka{background:linear-gradient(135deg,var(--lavender),#e3f2ff);border:2px solid var(--ungu-muda);border-radius:18px;padding:10px 14px;text-align:center}
+.angka b{display:block;font:700 2rem 'Fredoka',sans-serif;color:var(--ungu-tua);line-height:1.1}
+.angka span{color:var(--muted);font-weight:700;font-size:.9rem}
+.kontrol{margin:12px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.kontrol select,.kontrol input[type=search]{font:inherit;padding:7px 14px;border:2px solid var(--ungu-muda);border-radius:999px;background:#fff;color:var(--teks);max-width:100%}
+.kontrol select{text-overflow:ellipsis}
+.kontrol input[type=search]{flex:1;min-width:200px}
+.grafik{border:2px solid var(--ungu-muda);border-radius:18px;padding:14px;background:#fbfaff}
+.grafik h3{font-size:1.1rem;color:var(--ungu-tua);margin-bottom:10px}
+.baris{display:grid;grid-template-columns:minmax(70px,32%) 1fr 34px;gap:8px;align-items:center;margin:6px 0;font-weight:600}
+.baris .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trek{background:#ece7fb;border-radius:999px;height:16px;overflow:hidden}
+.isi-bar{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#b9a6f0,#8ecbf5)}
+.isi-bar.w1{background:linear-gradient(90deg,#f7a8d0,#b9a6f0)}
+.isi-bar.w2{background:linear-gradient(90deg,#8ecbf5,#9be0bb)}
+.baris b{text-align:right;color:var(--ungu-tua)}
+.tabelbox{overflow:auto;max-height:480px;border:2px solid var(--ungu-muda);border-radius:18px}
+.tabel{border-collapse:collapse;width:100%;font-size:.95rem}
+.tabel th{position:sticky;top:0;background:var(--ungu-muda);color:var(--ungu-tua);text-align:left;padding:8px 12px;white-space:nowrap;cursor:pointer;font-family:'Fredoka',sans-serif}
+.tabel td{padding:7px 12px;border-top:1px solid #ece7fb;vertical-align:top;min-width:70px}
+.tabel tbody tr:nth-child(even){background:#f8f5ff}
+.tabel tbody tr:hover{background:#e9f4ff}
+.kosongtbl{text-align:center;color:var(--muted);padding:18px!important}
+.galat{background:#fff4f8;border:2px dashed var(--pink);border-radius:18px;padding:18px;text-align:center}
+.galat .tombol{margin:8px 4px 0}
+details.form{margin-top:18px;border:2px solid var(--ungu-muda);border-radius:18px;padding:10px 14px}
+details.form summary{cursor:pointer;font:600 1.05rem 'Fredoka',sans-serif;color:var(--ungu-tua)}
+.catatan{font-size:.95rem;color:var(--muted);margin-top:12px}
+.catatan a{color:var(--ungu-tua);font-weight:700}
+
+footer{position:relative;z-index:1;text-align:center;color:var(--muted);font-weight:600;padding:10px 0}
+
+@media (max-width:600px){
+  .bio{grid-template-columns:1fr}.profil{max-width:170px;margin:0 auto}
+  nav button{padding:7px 14px;font-size:.92rem}
+}
+@media (prefers-reduced-motion:reduce){.kucing,.bunga{animation:none}.bunga{display:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <svg class="kucing" viewBox="0 0 200 190" role="img" aria-label="Kucing ungu lucu">
+      <path d="M40 80 L50 22 L88 52 Z" fill="#b9a6f0"/><path d="M160 80 L150 22 L112 52 Z" fill="#b9a6f0"/>
+      <path d="M52 66 L56 38 L76 54 Z" fill="#f9a8d4"/><path d="M148 66 L144 38 L124 54 Z" fill="#f9a8d4"/>
+      <ellipse cx="100" cy="100" rx="68" ry="58" fill="#cfc0fa"/>
+      <ellipse cx="78" cy="94" rx="9" ry="12" fill="#2e1f4a"/><ellipse cx="122" cy="94" rx="9" ry="12" fill="#2e1f4a"/>
+      <circle cx="81" cy="90" r="3.5" fill="#fff"/><circle cx="125" cy="90" r="3.5" fill="#fff"/>
+      <ellipse cx="62" cy="116" rx="11" ry="7" fill="#f9a8d4" opacity=".8"/><ellipse cx="138" cy="116" rx="11" ry="7" fill="#f9a8d4" opacity=".8"/>
+      <path d="M94 108 Q100 114 106 108 Q100 120 94 108Z" fill="#f472b6"/>
+      <path d="M100 114 Q92 126 84 120 M100 114 Q108 126 116 120" stroke="#2e1f4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M40 106 L14 100 M40 116 L14 120 M160 106 L186 100 M160 116 L186 120" stroke="#4a2c7a" stroke-width="2.5" stroke-linecap="round"/>
+      <g transform="translate(152 34)"><path d="M0 4 L0 24" stroke="#7fcfa5" stroke-width="3"/><path d="M-9 -2 Q-11 -20 0 -24 Q11 -20 9 -2 Q0 8 -9 -2Z" fill="#f7a8d0"/><path d="M-4 0 Q-6 -16 0 -24 Q6 -16 4 0 Q0 3 -4 0Z" fill="#fbc9e2"/></g>
+    </svg>
+    <h1>Hallo, Ichaa! 👋</h1>
+    <p>🌷 Selamat datang di dunia kecil Siti Marisa Saskia 🌷</p>
+  </header>
+
+  <nav role="tablist" aria-label="Menu tugas">
+    <button role="tab" aria-selected="false" data-tab="tugas1">🐱 Tugas 1</button>
+    <button role="tab" aria-selected="false" data-tab="tugas2">🌷 Tugas 2</button>
+    <button role="tab" aria-selected="true"  data-tab="tugas3">🐾 Tugas 3</button>
+    <button role="tab" aria-selected="false" data-tab="tugas4">💜 Tugas 4</button>
+  </nav>
+
+  <section id="tugas1">
+    <div class="kartu">
+      <h2>🐱 Biodata Diri</h2>
+      <div class="bio">
+        <div class="profil" id="profil" role="img" aria-label="Foto profil Icha">😺</div>
+        <dl id="biodata"></dl>
+      </div>
+    </div>
+    <div class="kartu">
+      <h2>🌷 Galeri Foto</h2>
+      <div class="galeri" id="galeri"></div>
+    </div>
+    <div class="kartu">
+      <h2>🎬 Video</h2>
+      <div class="video" id="video"></div>
+    </div>
+  </section>
+
+  <section id="tugas2"></section>
+  <section id="tugas3" class="aktif"></section>
+  <section id="tugas4"></section>
+
+  <svg class="taman" viewBox="0 0 400 80" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <defs><symbol id="tl" viewBox="0 0 40 80"><path d="M20 80 L20 40" stroke="#7fcfa5" stroke-width="3"/><path d="M20 72 Q5 64 8 48 Q18 54 20 68Z" fill="#9be0bb"/><path d="M10 34 Q8 12 20 8 Q32 12 30 34 Q20 44 10 34Z" fill="currentColor"/><path d="M15 31 Q14 15 20 8 Q26 15 25 31 Q20 36 15 31Z" fill="#fff" opacity=".35"/></symbol></defs>
+    <use href="#tl" x="10" y="8" width="40" height="72" color="#f7a8d0"/><use href="#tl" x="62" y="0" width="40" height="80" color="#b9a6f0"/>
+    <use href="#tl" x="116" y="10" width="40" height="70" color="#8ecbf5"/><use href="#tl" x="170" y="2" width="40" height="78" color="#f7a8d0"/>
+    <use href="#tl" x="224" y="8" width="40" height="72" color="#b9a6f0"/><use href="#tl" x="278" y="0" width="40" height="80" color="#8ecbf5"/>
+    <use href="#tl" x="332" y="10" width="40" height="70" color="#f7a8d0"/>
+  </svg>
+  <footer>Dibuat dengan 💜 oleh Icha</footer>
+</div>
+
+<script>
+const BIODATA = {
+  'Nama lengkap'      : 'Siti Marisa Saskia',
+  'Panggilan'         : 'Icha',
+  'Tempat, tgl lahir' : 'Kotabaru, 19 Maret 2006',
+  'Kampus'            : 'Universitas Lambung Mangkurat',
+  'Hobi'              : 'Menggambar, Dance, Memasak',
+  'Cita-cita'         : 'Akuntan',
+  'Motto'             : 'Hiduplah sebagaimana kamu dibutuhkan'
+};
+
+const FOTO = [
+  { src:'', judul:'Foto 1 - Tampak Depan' },
+  { src:'', judul:'Foto 2 - Tampak Kanan' },
+  { src:'', judul:'Foto 3 - Tampak Kiri' },
+  { src:'', judul:'Foto 4 - Tampak Belakang' }
+];
+
+const VIDEO = { file:'video.mp4' };
+
+const TUGAS = {
+  2: {
+    judul:'Tugas 2',
+    deskripsiLink:'Link formulir Tugas 2.',
+    links:[ { label:'Buka formulir Tugas 2 🌸', url:'https://forms.gle/turj5u5xLpFPPQkN9' } ],
+    deskripsiData:'Hasil Tugas 2 dalam bentuk tabel dan grafik.',
+    sheetUrl:'https://docs.google.com/spreadsheets/d/1aJqeC1Hx3Q16olil55-_CTFloRd56aAT8qfHvq_4Ajc/edit?resourcekey=&gid=1972119585#gid=1972119585'
+  },
+  3: {
+    judul:'Tugas 3',
+    deskripsiLink:'Link formulir Tugas 3. Formulirnya juga bisa diisi langsung di halaman ini.',
+    links:[ { label:'Buka formulir Tugas 3 🌷', url:'https://docs.google.com/forms/d/e/1FAIpQLSezTgpKQauFSs2G0sKIz7jK4IZ5jQu2iYsn_W-X5a1KKJz4mQ/viewform' } ],
+    formEmbed:'https://docs.google.com/forms/d/e/1FAIpQLSezTgpKQauFSs2G0sKIz7jK4IZ5jQu2iYsn_W-X5a1KKJz4mQ/viewform?embedded=true',
+    deskripsiData:'Hasil Tugas 3 dalam bentuk tabel dan grafik (Tingkat Kepuasan Pengguna Dompet Digital OVO).',
+    sheetUrl:'https://docs.google.com/spreadsheets/d/1bACTy2GCkf6fHW6SNxGLOdBoyeZVB9Yt13krfK5QAgM/edit?resourcekey=&gid=403555522#gid=403555522',
+    csvData:`Timestamp,Email Address,Nama,Jenis Kelamin,1. Bagaimana tingkat kepuasan anda terhadap kemudahan memilih metode Transfer antar Bank sesuai di aplikasi OVO?,2. Bagaimana tingkat kepuasan anda terhadap kestabilan layanan transfer antar Bank pada aplikasi OVO?,3. Bagaimana tingkat kepuasan anda terhadap ketepatan waktu penyelesaian transaksi transfer antar bank pada aplikasi OVO?,4. Bagaimana tingkat kepuasan anda terhadap kemampuan aplikasi OVO dalam memproses transaksi transfer antar bank tanpa keterlambatan?,5. Bagaimana tingkat kepuasan anda terhadap ketersedian layanan transfer antar bank OVO saat dibutuhkan?,6. Bagaimana tingkat kepuasan anda terhadap kejelasan informasi biaya administrasi transfer antar bank pada aplikasi OVO?,7. Bagaimana tingkat kepuasan anda terhadap keakuratan informasi nama dan nomor rekening tujuan pada aplikasi OVO?,8. Bagaimana tingkat kepuasan anda terhadap kejelasan informasi status keberhasilan atau kegagalan transaksi pada aplikasi OVO? ,9. Bagaimana tingkat kepuasan anda terhadap kelengkapan bukti transaksi yang diberikan oleh aplikasi OVO?,10. Bagaimana tingkat kepuasan anda terhadap kemudahan mengakses riwayat transaksi transfer antar bank pada aplikasi OVO?,11. Bagaimana tingkat kepuasan anda terhadap keterjangkauan biaya administrasi transfer antar bank pada aplikasi OVO?,12. Bagaimana tingkat kepuasan anda terhadap kesesuaian biaya transfer dengan manfaat yang diperoleh pada aplikasi OVO?,13. Bagaimana tingkat kepuasan anda terhadap penghematan biaya yang diperoleh dengan menggunakan aplikasi OVO?,14. Bagaimana tingkat kepuasan anda terhadap keuntungan dari promo atau bebas biaya transfer yang ditawarkan oleh aplikasi OVO?,15. Bagaimana tingkat kepuasan anda terhadap nilai ekonomis layanan transfer antar bank pada aplikasi OVO?,16. Bagaimana tingkat kepuasan anda terhadap keamanan transaksi transfer antar bank melalui aplikasi OVO?,17. Bagaimana tingkat kepuasan anda terhadap penggunaan PIN atau autentikasi untuk melindungi transaksi pada aplikasi OVO?,18. Bagaimana tingkat kepuasan anda terhadap fitur konfirmasi sebelum transaksi transfer antar bank dilakukan pada aplikasi OVO?,19. Bagaimana tingkat kepuasan anda terhadap perlindungan data rekening dan informasi pribadi pengguna pada aplikasi OVO?,20. Bagaimana tingkat kepuasan anda terhadap pemberitahuan aktivitas transaksi yang mencurigakan?,21. Bagaimana tingkat kepuasan anda terhadap kemudahan langkah-langkah melakukan transfer antar bank melalui aplikasi OVO?,22. Bagaimana tingkat kepuasan anda terhadap penghematan waktu dalam melakukan transfer menggunakan aplikasi OVO?,23. Bagaimana tingkat kepuasan anda terhadap kesederhanaan tahapan proses transfer antar bank pada aplikasi OVO?,24. Bagaimana tingkat kepuasan anda terhadap kemudahan menemukan fitur transfer antar bank pada aplikasi OVO?,25. Bagaimana tingkat kepuasan anda terhadap kepraktisan transfer antar bank melalui OVO dibandingkan metode transfer lainnya?,26. Bagaimana tingkat kepuasan anda terhadap kemudahan penggunaan layanan transfer antar bank pada aplikasi OVO?,27. Bagaimana tingkat kepuasan anda terhadap pelayanan aplikasi OVO ketika terjadi kendala transaksi antar bank?,28. Bagaimana tingkat kepuasan anda terhadap kemudahan menghubungi customer service OVO?,29. Bagaimana tingkat kepuasan anda terhadap solusi yang diberikan aplikasi OVO ketika transaksi mengalami kegagalan?,30. Bagaimana tingkat kepuasan anda secara keseluruhan terhadap layanan transfer antar bank pada aplikasi OVO?
+11/17/2026 14:31:53,rahmatullah87344@gmail.com,M.Rahmatullah,Laki-Laki,Puas,Sangat Puas,Puas,Puas,Puas,Puas,Sangat Puas,Puas,Sangat Puas,Puas,Sangat Puas,Sangat Puas,Puas,Netral,Netral,Sangat Puas,Sangat Puas,Netral,Sangat Puas,Sangat Puas,Puas,Netral,Puas,Sangat Puas,Sangat Puas,Netral,Sangat Puas,Puas,Sangat Puas,Puas
+11/18/2026 18:20:01,doyoungsyientia@gmail.com,Syientia Adinda Putri,Perempuan,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas
+11/18/2026 22:17:28,rahmadatunf@gmail.com,Rahmadatun Fuspita ,Perempuan,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas
+11/19/2026 15:28:49,sarinuraliya98@gmail.com,Alda Julia Amanda ,Perempuan,Puas,Puas,Puas,Netral,Sangat Puas,Netral,Sangat Puas,Netral,Sangat Puas,Puas,Sangat Puas,Puas,Puas,Sangat Puas,Puas,Netral,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Puas,Puas,Puas,Puas,Puas,Netral,Sangat Puas,Puas,Sangat Puas,Sangat Puas
+11/19/2026 23:09:21,irmayanti2782002@gmail.com,Nurhidaya,Perempuan,Puas,Puas,Puas,Puas,Puas,Netral,Netral,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Sangat Puas,Netral,Puas,Netral,Netral,Netral,Puas,Puas,Netral,Sangat Puas,Netral,Puas,Puas,Puas,Sangat Puas
+11/20/2026 14:55:44,saharukan96@gmail.com,Kacok,Laki-Laki,Netral,Netral,Puas,Puas,Puas,Puas,Puas,Netral,Puas,Netral,Netral,Puas,Puas,Puas,Puas,Puas,Netral,Puas,Netral,Netral,Netral,Netral,Netral,Netral,Puas,Netral,Netral,Netral,Netral,Netral
+11/20/2026 19:25:21,aldiyolandas12@gmail.com,Aldi Yolanda Syamsuddin ,Laki-Laki,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas
+11/21/2026 9:19:58,apriyawanharlan@gmail.com,Harlan,Laki-Laki,Sangat Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas,Puas
+11/22/2026 17:55:21,safarsafaruddin135@gmail.com,Safaruddin,Laki-Laki,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas,Sangat Puas`
+  },
+  4: {
+    judul:'Tugas 4',
+    deskripsiLink:'Link Tugas 4 belum diisi.',
+    links:[],
+    deskripsiData:'Data Tugas 4 belum diisi.',
+    sheetUrl:''
+  }
+};
+
+const KOLOM_PRIBADI = /e-?mail|surel|telepon|telpon|no\.?\s?hp|whatsapp|\bwa\b|nomor\s*(hp|telepon|telp|wa)/i;
+
+const $ = s => document.querySelector(s);
+const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', x === b));
+  document.querySelectorAll('section').forEach(s => s.classList.toggle('aktif', s.id === b.dataset.tab));
+  window.scrollTo({top:0, behavior:'smooth'});
+}));
+
+$('#biodata').innerHTML = Object.entries(BIODATA).map(([k,v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
+$('#galeri').innerHTML = FOTO.map(f => `
+  <figure class="foto"><div class="gbr">🌸</div><figcaption>${esc(f.judul)}</figcaption></figure>`).join('');
+$('#video').innerHTML = '<div class="kosong">🎬 Preview Fokus pada Tugas 3</div>';
+
+function parseCSV(t){
+  const r=[]; let row=[], c='', q=false;
+  for(let i=0;i<t.length;i++){
+    const ch=t[i];
+    if(q){ if(ch==='"'){ if(t[i+1]==='"'){c+='"';i++;} else q=false; } else c+=ch; }
+    else if(ch==='"') q=true;
+    else if(ch===','){ row.push(c); c=''; }
+    else if(ch==='\n'||ch==='\r'){ if(ch==='\r'&&t[i+1]==='\n') i++; row.push(c); r.push(row); row=[]; c=''; }
+    else c+=ch;
+  }
+  if(c!==''||row.length){ row.push(c); r.push(row); }
+  return r.filter(x=>x.some(v=>v.trim()!==''));
+}
+
+async function muatData(n){
+  const su = TUGAS[n].sheetUrl || '', box = $('#data'+n);
+  const mid = su.match(/\/d\/([\w-]+)/), mg = su.match(/gid=(\d+)/);
+  const cfg = { id: mid ? mid[1] : '', gid: mg ? mg[1] : '0' };
+  const asli = cfg.id ? `https://docs.google.com/spreadsheets/d/${cfg.id}/edit?gid=${cfg.gid}` : '';
+  box.innerHTML = '<p class="catatan">Memuat data… 🐾</p>';
+
+  let teks = null, sumber = 'live';
+  if (cfg.id) {
+    const urls = [
+      `https://docs.google.com/spreadsheets/d/${cfg.id}/gviz/tq?tqx=out:csv&gid=${cfg.gid}`,
+      `https://docs.google.com/spreadsheets/d/${cfg.id}/export?format=csv&gid=${cfg.gid}`
+    ];
+    for(const u of urls){
+      try{
+        const r = await fetch(u);
+        if(r.ok){ const t = await r.text(); if(!/^\s*<(!doctype|html)/i.test(t)){ teks = t; break; } }
+      }catch(e){}
+    }
+  }
+  if(!teks && TUGAS[n].csvData){
+    teks = TUGAS[n].csvData;
+    sumber = 'lokal';
+  }
+  if(!teks){
+    box.innerHTML = `<div class="galat">😿 Data belum bisa dimuat.<br>Pastikan spreadsheet dibagikan dengan akses <b>"Siapa saja yang memiliki link"</b> sebagai <b>Pelihat</b>.<br>
+      <button class="tombol" id="ulang${n}">Coba lagi</button>${asli ? ` <a class="tombol" href="${esc(asli)}" target="_blank" rel="noopener">Buka spreadsheet</a>` : ''}</div>`;
+    $('#ulang'+n).onclick = () => muatData(n);
+    return;
+  }
+
+  const rows = parseCSV(teks);
+  if(rows.length < 2){ box.innerHTML = '<p class="catatan">Spreadsheet masih kosong 🌷</p>'; return; }
+  const head = rows[0].map(h => h.trim() || 'Kolom');
+  const data = rows.slice(1);
+  const kolom = head.map((h,i)=>i).filter(i => !KOLOM_PRIBADI.test(head[i]));
+  const st = { q:'', sort:-1, asc:true, chart:-1 };
+
+  const unik = i => new Set(data.map(r => (r[i]||'').trim()).filter(Boolean));
+  const calon = kolom.filter(i => !/timestamp|cap waktu|waktu/i.test(head[i]) && unik(i).size>=2 && unik(i).size<=12);
+  st.chart = calon.length ? calon[0] : -1;
+
+  box.innerHTML = `
+    <div class="ringkas">
+      <div class="angka"><b>${data.length}</b><span>Jumlah data</span></div>
+      <div class="angka"><b>${kolom.length}</b><span>Kolom</span></div>
+    </div>
+    <div class="kontrol">
+      <label>Grafik kolom:
+        <select id="pilih${n}">${kolom.map(i=>`<option value="${i}" ${i===st.chart?'selected':''}>${esc(head[i])}</option>`).join('')}</select>
+      </label>
+    </div>
+    <div class="grafik" id="grafik${n}"></div>
+    <div class="kontrol"><input type="search" id="cari${n}" placeholder="🔍 Cari data…" aria-label="Cari data"></div>
+    <div class="tabelbox"><table class="tabel" id="tabel${n}"></table></div>
+    <p class="catatan" id="info${n}"></p>
+    <div class="kontrol">${asli ? `<a class="tombol" href="${esc(asli)}" target="_blank" rel="noopener">Buka spreadsheet asli</a> ` : ''}<button class="tombol" id="ulang${n}">Muat ulang 🔄</button></div>`;
+
+  function gambarGrafik(){
+    const g = $('#grafik'+n);
+    if(st.chart<0){ g.innerHTML=''; return; }
+    const hit = {};
+    data.forEach(r => { const v=(r[st.chart]||'').trim(); if(v) hit[v]=(hit[v]||0)+1; });
+    const urut = Object.entries(hit).sort((a,b)=>b[1]-a[1]).slice(0,10);
+    const maks = urut.length ? urut[0][1] : 1;
+    g.innerHTML = `<h3>${esc(head[st.chart])}</h3>` + urut.map(([k,v],i)=>`
+      <div class="baris"><span class="lbl" title="${esc(k)}">${esc(k)}</span>
+      <span class="trek"><span class="isi-bar w${i%3}" style="width:${Math.max(4,v/maks*100)}%"></span></span><b>${v}</b></div>`).join('');
+  }
+  function gambarTabel(){
+    let list = data.slice();
+    if(st.q){ const q=st.q.toLowerCase(); list = list.filter(r => kolom.some(i => (r[i]||'').toLowerCase().includes(q))); }
+    if(st.sort>=0){
+      list = list.slice().sort((a,b)=>{
+        const x=(a[st.sort]||'').trim(), y=(b[st.sort]||'').trim();
+        const nx=parseFloat(x.replace(',','.')), ny=parseFloat(y.replace(',','.'));
+        const c = (!isNaN(nx)&&!isNaN(ny)&&/^[-\d.,\s]+$/.test(x+y)) ? nx-ny : x.localeCompare(y,'id');
+        return st.asc ? c : -c;
+      });
+    }
+    $('#tabel'+n).innerHTML =
+      '<thead><tr><th>#</th>' + kolom.map(i=>`<th data-k="${i}" tabindex="0" role="button">${esc(head[i])}${st.sort===i?(st.asc?' ▲':' ▼'):''}</th>`).join('') + '</tr></thead>' +
+      '<tbody>' + (list.length ? list.map((r,k)=>`<tr><td>${k+1}</td>${kolom.map(i=>`<td>${esc(r[i]||'')}</td>`).join('')}</tr>`).join('') :
+        `<tr><td colspan="${kolom.length+1}" class="kosongtbl">Tidak ada data yang cocok 🍃</td></tr>`) + '</tbody>';
+    $('#info${n}'.replace('${n}', n)).textContent =
+      `Menampilkan ${list.length} dari ${data.length} data.` +
+      (kolom.length<head.length ? ' Kolom data pribadi (email) disembunyikan.' : '') +
+      (sumber==='lokal' ? ' (Menampilkan data cadangan lokal)' : '');
+  }
+  $('#pilih'+n).onchange = e => { st.chart = +e.target.value; gambarGrafik(); };
+  $('#cari'+n).oninput = e => { st.q = e.target.value; gambarTabel(); };
+  $('#ulang'+n).onclick = () => muatData(n);
+  const urutKlik = e => { const th = e.target.closest('th[data-k]'); if(!th) return; const k=+th.dataset.k; st.asc = st.sort===k ? !st.asc : true; st.sort=k; gambarTabel(); };
+  $('#tabel'+n).addEventListener('click', urutKlik);
+  $('#tabel'+n).addEventListener('keydown', e => { if(e.key==='Enter') urutKlik(e); });
+  gambarGrafik(); gambarTabel();
+}
+
+[2,3,4].forEach(n => {
+  const t = TUGAS[n];
+  let link = `<h2>🔗 ${esc(t.judul)}: Link</h2><p>${esc(t.deskripsiLink)}</p>`;
+  if (t.links && t.links.length) {
+    link += '<div class="kontrol">' + t.links.map(l => `<a class="tombol" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('') + '</div>';
+  } else {
+    link += '<span class="tombol mati">Belum ada link</span>';
+  }
+  if (t.formEmbed) link += `<details class="form"><summary>📝 Isi formulir di halaman ini</summary>
+      <iframe class="embed" src="${esc(t.formEmbed)}" title="Formulir ${esc(t.judul)}" loading="lazy">Memuat…</iframe></details>`;
+
+  let dat = `<h2>📊 ${esc(t.judul)}: Sajian Data</h2><p>${esc(t.deskripsiData)}</p>`;
+  dat += (t.sheetUrl || t.csvData) ? `<div class="data" id="data${n}"></div>` : '<span class="tombol mati">Belum ada spreadsheet</span>';
+
+  $('#tugas'+n).innerHTML = `<div class="kartu isi">${link}</div><div class="kartu isi">${dat}</div>`;
+  if (t.sheetUrl || t.csvData) muatData(n);
+});
+
+(function(){
+  const ikon = ['🌷','🐾','💜','🌷','☁️'];
+  for(let i=0;i<14;i++){
+    const s = document.createElement('span');
+    s.className = 'bunga'; s.setAttribute('aria-hidden','true');
+    s.textContent = ikon[i % ikon.length];
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.fontSize = (16 + Math.random()*16) + 'px';
+    s.style.animationDuration = (12 + Math.random()*14) + 's';
+    s.style.animationDelay = (-Math.random()*20) + 's';
+    document.body.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>
