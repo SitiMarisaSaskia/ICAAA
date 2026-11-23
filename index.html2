@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dunia Kecilku</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff4d6; --card:#ffffff; --ink:#3b2a4a; --muted:#6e5a80;
+  --pink:#ff8fb8; --mint:#7fe0c0; --sky:#7cc4ff; --sun:#ffd25e; --grape:#b69bff;
+  --line:#3b2a4a;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#2a2038;--card:#3a2e4d;--ink:#fff3dc;--muted:#cdbfe0;--line:#fff3dc}
+}
+:root[data-theme="dark"]{--bg:#2a2038;--card:#3a2e4d;--ink:#fff3dc;--muted:#cdbfe0;--line:#fff3dc}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;line-height:1.6;
+  background-image:radial-gradient(var(--sun) 2px,transparent 2px);background-size:28px 28px;background-attachment:fixed}
+h1,h2,h3{font-family:'Baloo 2','Nunito',system-ui,sans-serif;margin:0;line-height:1.15}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 60px}
+header{text-align:center;padding:18px 0 8px}
+.mascot{font-size:72px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-4deg)}}
+header h1{font-size:clamp(2rem,7vw,3.2rem);font-weight:800}
+header p{margin:6px 0 0;color:var(--muted)}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+nav button{font:700 1rem 'Baloo 2',sans-serif;color:var(--ink);background:var(--card);border:3px solid var(--line);
+  border-radius:20px;padding:12px 6px;cursor:pointer;box-shadow:0 5px 0 var(--line);transition:transform .12s,box-shadow .12s}
+nav button span{display:block;font-size:1.8rem}
+nav button:hover{transform:translateY(-2px)}
+nav button:active{transform:translateY(4px);box-shadow:0 1px 0 var(--line)}
+nav button[aria-selected="true"]{background:var(--c)}
+nav button:nth-child(1){--c:var(--pink)}nav button:nth-child(2){--c:var(--mint)}
+nav button:nth-child(3){--c:var(--sky)}nav button:nth-child(4){--c:var(--sun)}
+nav button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--grape);outline-offset:3px}
+section{display:none;background:var(--card);border:3px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 8px 0 var(--line)}
+section.on{display:block}
+section h2{font-size:1.9rem;margin-bottom:14px}
+/* biodata */
+.bio{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:start}
+.avatar{aspect-ratio:1;border:3px solid var(--line);border-radius:50%;background:var(--pink);display:grid;place-items:center;font-size:96px;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.bio dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 14px}
+.bio dt{font-weight:700;background:var(--sun);color:#3b2a4a;border-radius:12px;padding:2px 12px;height:fit-content}
+.bio dd{margin:0;align-self:center;overflow-wrap:anywhere}
+.edit{margin-top:14px}
+.btn{font:700 1rem 'Baloo 2',sans-serif;color:#3b2a4a;background:var(--mint);border:3px solid var(--line);
+  border-radius:999px;padding:6px 18px;cursor:pointer;box-shadow:0 4px 0 var(--line)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+/* galeri */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.photo{border:3px solid var(--line);border-radius:20px;overflow:hidden;background:var(--bg);cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit}
+.photo .pic{aspect-ratio:1;display:grid;place-items:center;font-size:64px}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo figcaption,.photo .cap{padding:6px 10px;font-weight:700;border-top:3px solid var(--line);background:var(--card)}
+.photo:nth-child(5n+1) .pic{background:var(--pink)}.photo:nth-child(5n+2) .pic{background:var(--mint)}
+.photo:nth-child(5n+3) .pic{background:var(--sky)}.photo:nth-child(5n+4) .pic{background:var(--sun)}
+.photo:nth-child(5n) .pic{background:var(--grape)}
+.hint{color:var(--muted);font-size:.95rem;margin:0 0 14px}
+dialog{border:3px solid var(--line);border-radius:24px;background:var(--card);color:var(--ink);padding:18px;max-width:min(92vw,520px)}
+dialog::backdrop{background:rgba(40,20,60,.6)}
+dialog .big{font-size:120px;text-align:center}
+dialog img{max-width:100%;border-radius:14px;display:block;margin:0 auto}
+/* video */
+.video-box{aspect-ratio:16/9;border:3px solid var(--line);border-radius:20px;overflow:hidden;background:#000}
+.video-box iframe,.video-box video{width:100%;height:100%;border:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.row input{flex:1;min-width:180px;font:inherit;padding:8px 14px;border:3px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{font:700 .95rem 'Baloo 2',sans-serif;background:var(--sky);color:#3b2a4a;border:3px solid var(--line);border-radius:999px;padding:3px 14px;cursor:pointer}
+/* tugas */
+.progress{height:22px;border:3px solid var(--line);border-radius:999px;overflow:hidden;background:var(--bg);margin-bottom:6px}
+.progress div{height:100%;width:0;background:var(--mint);transition:width .3s}
+.pmsg{margin:0 0 14px;color:var(--muted);font-weight:700}
+ul.tasks{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}
+.tasks li{display:flex;align-items:center;gap:10px;border:3px solid var(--line);border-radius:18px;padding:8px 12px;background:var(--bg)}
+.tasks li.done .t{text-decoration:line-through;opacity:.55}
+.tasks input[type=checkbox]{width:24px;height:24px;accent-color:#2fbf8f;flex:none}
+.tasks .t{flex:1;overflow-wrap:anywhere}
+.tasks .del{background:none;border:0;font-size:1.3rem;cursor:pointer}
+.empty{text-align:center;color:var(--muted);padding:14px}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-weight:700}
+@media (max-width:600px){
+  .bio{grid-template-columns:1fr}.avatar{max-width:180px;margin:0 auto;font-size:80px}
+  nav{gap:6px}nav button{font-size:.85rem;border-radius:16px}nav button span{font-size:1.5rem}
+}
+@media (prefers-reduced-motion:reduce){.mascot{animation:none}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mascot" aria-hidden="true">🐥</div>
+    <h1>Dunia Kecilku</h1>
+    <p>Halo! Pilih menu di bawah untuk jalan-jalan ya.</p>
+  </header>
+
+  <nav role="tablist" aria-label="Menu utama">
+    <button role="tab" aria-selected="true" data-tab="biodata"><span>🧸</span>Biodata</button>
+    <button role="tab" aria-selected="false" data-tab="galeri"><span>📸</span>Galeri</button>
+    <button role="tab" aria-selected="false" data-tab="video"><span>🎬</span>Video</button>
+    <button role="tab" aria-selected="false" data-tab="tugas"><span>📝</span>Tugas</button>
+  </nav>
+
+  <!-- BIODATA -->
+  <section id="biodata" class="on">
+    <h2>Kenalan dulu yuk! 🧸</h2>
+    <div class="bio">
+      <div class="avatar" id="avatar" aria-label="Foto profil">😄</div>
+      <div>
+        <dl id="bioList"></dl>
+        <div class="edit">
+          <button class="btn" id="editBio">✏️ Ubah biodata</button>
+          <label class="btn" style="display:inline-block;background:var(--sky)">🖼️ Ganti foto
+            <input type="file" id="avatarFile" accept="image/*" hidden>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERI -->
+  <section id="galeri">
+    <h2>Galeri Kenangan 📸</h2>
+    <p class="hint">Ketuk foto untuk memperbesar. Tambahkan fotomu sendiri di bawah!</p>
+    <div class="grid" id="gallery"></div>
+    <div class="row">
+      <label class="btn" style="background:var(--pink)">➕ Tambah foto
+        <input type="file" id="photoFile" accept="image/*" multiple hidden>
+      </label>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video">
+    <h2>Bioskop Mini 🎬</h2>
+    <p class="hint">Tempel link YouTube, lalu tekan Putar.</p>
+    <div class="video-box" id="player"></div>
+    <div class="row">
+      <input id="ytUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." aria-label="Link YouTube">
+      <button class="btn" id="playBtn">▶️ Putar</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <!-- TUGAS -->
+  <section id="tugas">
+    <h2>Daftar Tugas 📝</h2>
+    <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+    <p class="pmsg" id="pmsg"></p>
+    <div class="row" style="margin-top:0">
+      <input id="taskIn" type="text" placeholder="Tugas baru, misalnya: kerjakan PR" aria-label="Tugas baru" maxlength="120">
+      <button class="btn" id="addTask" style="background:var(--sun)">➕ Tambah</button>
+    </div>
+    <ul class="tasks" id="taskList"></ul>
+  </section>
+
+  <footer>Dibuat dengan 💖 dan sedikit kopi</footer>
+</div>
+
+<dialog id="dlg"><div id="dlgBody"></div><div class="row" style="justify-content:center"><button class="btn" id="dlgClose">Tutup</button></div></dialog>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=t=>t.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ===== MENU ===== */
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===b.dataset.tab));
+}));
+
+/* ===== BIODATA (ubah isi di sini) ===== */
+const bio={
+  'Nama':'Nama Kamu',
+  'Panggilan':'Si Lucu',
+  'Tempat, tanggal lahir':'Sampit, 1 Januari 2008',
+  'Sekolah':'Nama Sekolah Kamu',
+  'Hobi':'Menggambar, main game, makan bakso',
+  'Cita-cita':'Jadi desainer hebat',
+  'Makanan favorit':'Bakso & es teh manis',
+  'Motto':'Santai tapi pasti!'
+};
+function renderBio(){
+  $('#bioList').innerHTML=Object.entries(bio).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
+}
+renderBio();
+$('#editBio').onclick=()=>{
+  for(const k of Object.keys(bio)){
+    const v=prompt(k+':',bio[k]);
+    if(v===null)break;
+    if(v.trim())bio[k]=v.trim();
+  }
+  renderBio();
+};
+$('#avatarFile').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{$('#avatar').innerHTML=`<img alt="Foto profil" src="${r.result}">`};
+  r.readAsDataURL(f);
+};
+
+/* ===== GALERI ===== */
+const photos=[
+  {e:'🌸',c:'Taman bunga'},{e:'🏖️',c:'Liburan pantai'},{e:'🍜',c:'Makan enak'},
+  {e:'🐱',c:'Kucing lucu'},{e:'🎂',c:'Ulang tahun'},{e:'⛰️',c:'Jalan-jalan'}
+];
+function renderGallery(){
+  $('#gallery').innerHTML=photos.map((p,i)=>`
+    <button class="photo" data-i="${i}" aria-label="Lihat ${esc(p.c)}">
+      <div class="pic">${p.src?`<img alt="${esc(p.c)}" src="${p.src}">`:p.e}</div>
+      <div class="cap">${esc(p.c)}</div>
+    </button>`).join('');
+}
+renderGallery();
+$('#gallery').onclick=e=>{
+  const b=e.target.closest('.photo');if(!b)return;
+  const p=photos[b.dataset.i];
+  $('#dlgBody').innerHTML=(p.src?`<img alt="${esc(p.c)}" src="${p.src}">`:`<div class="big">${p.e}</div>`)+`<h3 style="text-align:center;margin-top:8px">${esc(p.c)}</h3>`;
+  $('#dlg').showModal();
+};
+$('#dlgClose').onclick=()=>$('#dlg').close();
+$('#photoFile').onchange=e=>{
+  [...e.target.files].forEach(f=>{
+    const r=new FileReader();
+    r.onload=()=>{photos.push({src:r.result,c:f.name.replace(/\.[^.]+$/,'').slice(0,24)});renderGallery()};
+    r.readAsDataURL(f);
+  });
+};
+
+/* ===== VIDEO ===== */
+const vids=[
+  {n:'🎵 Video 1',id:'dQw4w9WgXcQ'},
+  {n:'🐶 Video 2',id:'jNQXAC9IVRw'}
+];
+function ytId(u){
+  const m=u.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:null;
+}
+function play(id){
+  $('#player').innerHTML=`<iframe src="https://www.youtube.com/embed/${id}" title="Video" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+}
+$('#chips').innerHTML=vids.map((v,i)=>`<button class="chip" data-i="${i}">${v.n}</button>`).join('');
+$('#chips').onclick=e=>{const c=e.target.closest('.chip');if(c)play(vids[c.dataset.i].id)};
+$('#playBtn').onclick=()=>{
+  const id=ytId($('#ytUrl').value.trim());
+  id?play(id):alert('Link YouTube-nya belum benar. Coba salin lagi dari YouTube ya!');
+};
+$('#player').innerHTML='<div style="height:100%;display:grid;place-items:center;color:#fff;font-size:3rem">🍿</div>';
+
+/* ===== TUGAS ===== */
+let tasks=[
+  {t:'Kerjakan PR Matematika',d:false},
+  {t:'Buat laporan kelompok',d:false},
+  {t:'Rapikan meja belajar',d:true}
+];
+function renderTasks(){
+  const list=$('#taskList');
+  list.innerHTML=tasks.length?tasks.map((k,i)=>`
+    <li class="${k.d?'done':''}">
+      <input type="checkbox" data-i="${i}" ${k.d?'checked':''} aria-label="Selesai: ${esc(k.t)}">
+      <span class="t">${esc(k.t)}</span>
+      <button class="del" data-del="${i}" aria-label="Hapus ${esc(k.t)}">🗑️</button>
+    </li>`).join(''):'<li class="empty" style="display:block;border:0">Belum ada tugas. Santai dulu 🍃</li>';
+  const done=tasks.filter(k=>k.d).length,pct=tasks.length?Math.round(done/tasks.length*100):0;
+  $('#bar').style.width=pct+'%';
+  $('#pmsg').textContent=!tasks.length?'':pct===100?'Hore, semua tugas selesai! 🎉':`${done} dari ${tasks.length} tugas selesai. Semangat! 💪`;
+}
+renderTasks();
+function addTask(){
+  const v=$('#taskIn').value.trim();if(!v)return;
+  tasks.push({t:v,d:false});$('#taskIn').value='';renderTasks();
+}
+$('#addTask').onclick=addTask;
+$('#taskIn').addEventListener('keydown',e=>{if(e.key==='Enter')addTask()});
+$('#taskList').onclick=e=>{
+  if(e.target.matches('input[type=checkbox]')){tasks[e.target.dataset.i].d=e.target.checked;renderTasks()}
+  const d=e.target.closest('[data-del]');if(d){tasks.splice(d.dataset.del,1);renderTasks()}
+};
+</script>
+</body>
+</html>
